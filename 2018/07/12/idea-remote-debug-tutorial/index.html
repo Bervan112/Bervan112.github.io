@@ -15,16 +15,16 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="背景 公司使用scala作为后端开发语言，刚刚接触这门语言及对应的IDE工具，互联网上关于scala在idea上remote的debug模式资料比较少 本文将介绍如何启动idea的remote调试功能，便于快速迭代开发  语言环境 JDK 1.8 scala 2.12.6 sbt 1.1.6 IDEA (集成开发工具)  示例代码下载代码，并倒入有scala，sbt插件的IDEAhttp://gi">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2018/07/12/images/idea/i1.png">
-<meta property="og:image" content="http://yoursite.com/2018/07/12/images/idea/i2.png">
-<meta property="og:image" content="http://yoursite.com/2018/07/12/images/idea/i3.png">
-<meta property="og:image" content="http://yoursite.com/2018/07/12/images/idea/i4.png">
-<meta property="og:image" content="http://yoursite.com/2018/07/12/images/idea/i5.png">
-<meta property="og:updated_time" content="2019-05-02T06:06:21.636Z">
+<meta property="og:image" content="http://yoursite.com/images/idea/i1.png">
+<meta property="og:image" content="http://yoursite.com/images/idea/i2.png">
+<meta property="og:image" content="http://yoursite.com/images/idea/i3.png">
+<meta property="og:image" content="http://yoursite.com/images/idea/i4.png">
+<meta property="og:image" content="http://yoursite.com/images/idea/i5.png">
+<meta property="og:updated_time" content="2019-05-02T06:13:44.326Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="idea使用sbt进行remote调试">
 <meta name="twitter:description" content="背景 公司使用scala作为后端开发语言，刚刚接触这门语言及对应的IDE工具，互联网上关于scala在idea上remote的debug模式资料比较少 本文将介绍如何启动idea的remote调试功能，便于快速迭代开发  语言环境 JDK 1.8 scala 2.12.6 sbt 1.1.6 IDEA (集成开发工具)  示例代码下载代码，并倒入有scala，sbt插件的IDEAhttp://gi">
-<meta name="twitter:image" content="http://yoursite.com/2018/07/12/images/idea/i1.png">
+<meta name="twitter:image" content="http://yoursite.com/images/idea/i1.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -110,18 +110,18 @@
 <h2 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h2><p>下载代码，并倒入有scala，sbt插件的IDEA<br><a href="http://gitlab.gyenno.com/backend/gyenno-service" target="_blank" rel="noopener">http://gitlab.gyenno.com/backend/gyenno-service</a></p>
 <a id="more"></a>
 <h2 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h2><h3 id="1、找到File菜单下Settings打开SBT配置，在对应JVM下VM-parameters中添加以下配置"><a href="#1、找到File菜单下Settings打开SBT配置，在对应JVM下VM-parameters中添加以下配置" class="headerlink" title="1、找到File菜单下Settings打开SBT配置，在对应JVM下VM parameters中添加以下配置"></a>1、找到File菜单下Settings打开SBT配置，在对应JVM下VM parameters中添加以下配置</h3><p>-XX:MaxPermSize=384M -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005</p>
-<p>如下图：<br><img src="../images/idea/i1.png" alt></p>
+<p>如下图：<br><img src="/images/idea/i1.png" alt></p>
 <h3 id="2、打开idea里Termilal，并用sbt启动项目，会出现”Listening-for-transport-dt-socket-at-address-5005”"><a href="#2、打开idea里Termilal，并用sbt启动项目，会出现”Listening-for-transport-dt-socket-at-address-5005”" class="headerlink" title="2、打开idea里Termilal，并用sbt启动项目，会出现”Listening for transport dt_socket at address: 5005”"></a>2、打开idea里Termilal，并用sbt启动项目，会出现”Listening for transport dt_socket at address: 5005”</h3><p> sbt -jvm-debug 5005</p>
-<h3 id="3、找到Run菜单下Edit-Configurations，点击后出现配置页面，点击-，选择remote-按照下述方式配置"><a href="#3、找到Run菜单下Edit-Configurations，点击后出现配置页面，点击-，选择remote-按照下述方式配置" class="headerlink" title="3、找到Run菜单下Edit Configurations，点击后出现配置页面，点击+，选择remote;按照下述方式配置"></a>3、找到Run菜单下Edit Configurations，点击后出现配置页面，点击+，选择remote;按照下述方式配置</h3><p> Name:自定义名称<br> Transport:Socket<br> Debugger mode:Attach<br> Host:127.0.0.1<br> Port:5005<br> Search sources using modules classpath:选择目标项目<br>如下图：<br><img src="../images/idea/i2.png" alt></p>
-<h3 id="4、在idea右上角debug附近，选择刚刚配置的remote的debug配置，点击debug，直到debug控制台出现”Connected-to-the-target-VM-address-‘127-0-0-1-5005’-transport-‘socket’”"><a href="#4、在idea右上角debug附近，选择刚刚配置的remote的debug配置，点击debug，直到debug控制台出现”Connected-to-the-target-VM-address-‘127-0-0-1-5005’-transport-‘socket’”" class="headerlink" title="4、在idea右上角debug附近，选择刚刚配置的remote的debug配置，点击debug，直到debug控制台出现”Connected to the target VM, address: ‘127.0.0.1:5005’, transport: ‘socket’”"></a>4、在idea右上角debug附近，选择刚刚配置的remote的debug配置，点击debug，直到debug控制台出现”Connected to the target VM, address: ‘127.0.0.1:5005’, transport: ‘socket’”</h3><p> 如下图：<br> <img src="../images/idea/i3.png" alt><br> <img src="../images/idea/i4.png" alt></p>
-<h3 id="5、在测试类上打上断点"><a href="#5、在测试类上打上断点" class="headerlink" title="5、在测试类上打上断点"></a>5、在测试类上打上断点</h3><h3 id="6、返回控制台，输入以下命令，直到断点变成带勾的样式，之后就可以调试你的项目了"><a href="#6、返回控制台，输入以下命令，直到断点变成带勾的样式，之后就可以调试你的项目了" class="headerlink" title="6、返回控制台，输入以下命令，直到断点变成带勾的样式，之后就可以调试你的项目了"></a>6、返回控制台，输入以下命令，直到断点变成带勾的样式，之后就可以调试你的项目了</h3><p>project 项目名<br>~testOnly *DeviceActorTest<br>如下图：<br> <img src="../images/idea/i5.png" alt></p>
+<h3 id="3、找到Run菜单下Edit-Configurations，点击后出现配置页面，点击-，选择remote-按照下述方式配置"><a href="#3、找到Run菜单下Edit-Configurations，点击后出现配置页面，点击-，选择remote-按照下述方式配置" class="headerlink" title="3、找到Run菜单下Edit Configurations，点击后出现配置页面，点击+，选择remote;按照下述方式配置"></a>3、找到Run菜单下Edit Configurations，点击后出现配置页面，点击+，选择remote;按照下述方式配置</h3><p> Name:自定义名称<br> Transport:Socket<br> Debugger mode:Attach<br> Host:127.0.0.1<br> Port:5005<br> Search sources using modules classpath:选择目标项目<br>如下图：<br><img src="/images/idea/i2.png" alt></p>
+<h3 id="4、在idea右上角debug附近，选择刚刚配置的remote的debug配置，点击debug，直到debug控制台出现”Connected-to-the-target-VM-address-‘127-0-0-1-5005’-transport-‘socket’”"><a href="#4、在idea右上角debug附近，选择刚刚配置的remote的debug配置，点击debug，直到debug控制台出现”Connected-to-the-target-VM-address-‘127-0-0-1-5005’-transport-‘socket’”" class="headerlink" title="4、在idea右上角debug附近，选择刚刚配置的remote的debug配置，点击debug，直到debug控制台出现”Connected to the target VM, address: ‘127.0.0.1:5005’, transport: ‘socket’”"></a>4、在idea右上角debug附近，选择刚刚配置的remote的debug配置，点击debug，直到debug控制台出现”Connected to the target VM, address: ‘127.0.0.1:5005’, transport: ‘socket’”</h3><p> 如下图：<br> <img src="/images/idea/i3.png" alt><br> <img src="/images/idea/i4.png" alt></p>
+<h3 id="5、在测试类上打上断点"><a href="#5、在测试类上打上断点" class="headerlink" title="5、在测试类上打上断点"></a>5、在测试类上打上断点</h3><h3 id="6、返回控制台，输入以下命令，直到断点变成带勾的样式，之后就可以调试你的项目了"><a href="#6、返回控制台，输入以下命令，直到断点变成带勾的样式，之后就可以调试你的项目了" class="headerlink" title="6、返回控制台，输入以下命令，直到断点变成带勾的样式，之后就可以调试你的项目了"></a>6、返回控制台，输入以下命令，直到断点变成带勾的样式，之后就可以调试你的项目了</h3><p>project 项目名<br>~testOnly *DeviceActorTest<br>如下图：<br> <img src="/images/idea/i5.png" alt></p>
 <h3 id="7、如果是希望通过swagger来调试你自己的代码，那么你需要用下述命令启动项目，并在你要调试的代码出打上断点"><a href="#7、如果是希望通过swagger来调试你自己的代码，那么你需要用下述命令启动项目，并在你要调试的代码出打上断点" class="headerlink" title="7、如果是希望通过swagger来调试你自己的代码，那么你需要用下述命令启动项目，并在你要调试的代码出打上断点"></a>7、如果是希望通过swagger来调试你自己的代码，那么你需要用下述命令启动项目，并在你要调试的代码出打上断点</h3><p>run -jvm-debug 5005</p>
 <h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="https://stackoverflow.com/questions/4150776/debugging-scala-code-with-simple-build-tool-sbt-and-intellij" target="_blank" rel="noopener">Debugging Scala code with simple-build-tool (sbt) and IntelliJ</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/12/idea-remote-debug-tutorial/" data-id="cjv68yf940000wgs0xsoyhbb8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/12/idea-remote-debug-tutorial/" data-id="cjv697qxk0001ews0urs6qd8j" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IDEA/">IDEA</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/debug/">debug</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/博文/">博文</a></li></ul>
